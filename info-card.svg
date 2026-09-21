@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="490" height="606" viewBox="0 0 490 606" role="img" aria-label="Thiago Vinicius — informações">
+<style>.l{opacity:0;animation:in .4s ease-out forwards}@keyframes in{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}</style>
+<rect width="490" height="606" rx="10" fill="#0d1117" stroke="#30363d"/>
+<circle cx="20" cy="20" r="5" fill="#ff5f56"/><circle cx="36" cy="20" r="5" fill="#ffbd2e"/><circle cx="52" cy="20" r="5" fill="#27c93f"/><text x="245.0" y="24" font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="13" fill="#8b949e" text-anchor="middle">~ neofetch</text><line x1="0" y1="40" x2="490" y2="40" stroke="#21262d"/>
+<g font-family="ui-monospace,SFMono-Regular,Menlo,Consolas,monospace" font-size="13">
+<text x="22" y="72" xml:space="preserve" class="l" style="animation-delay:0.30s"><tspan fill="#39d353" font-weight="bold">thiago</tspan><tspan fill="#c9d1d9">@</tspan><tspan fill="#39d353" font-weight="bold">github</tspan></text>
+<text x="22" y="93" xml:space="preserve" class="l" style="animation-delay:0.42s"><tspan fill="#8b949e">-------------</tspan></text>
+<text x="22" y="114" xml:space="preserve" class="l" style="animation-delay:0.54s"><tspan fill="#39d353" font-weight="bold">Nome</tspan><tspan fill="#c9d1d9">: Thiago Vinicius</tspan></text>
+<text x="22" y="135" xml:space="preserve" class="l" style="animation-delay:0.66s"><tspan fill="#39d353" font-weight="bold">Foco</tspan><tspan fill="#c9d1d9">: Dev &amp; Dados — Python, SQL, APIs</tspan></text>
+<text x="22" y="156" xml:space="preserve" class="l" style="animation-delay:0.78s"><tspan fill="#39d353" font-weight="bold">Agora</tspan><tspan fill="#c9d1d9">: Estudando todo dia e documentando o processo aqui</tspan></text>
+<text x="22" y="177" xml:space="preserve" class="l" style="animation-delay:0.90s"><tspan fill="#39d353" font-weight="bold">OS</tspan><tspan fill="#c9d1d9">: Windows 11 + WSL2</tspan></text>
+<text x="22" y="198" xml:space="preserve" class="l" style="animation-delay:1.02s"><tspan fill="#39d353" font-weight="bold">Stack</tspan><tspan fill="#c9d1d9">: Python · FastAPI · SQLite · SQL · JavaScript ·</tspan></text>
+<text x="22" y="219" xml:space="preserve" class="l" style="animation-delay:1.14s">       <tspan fill="#c9d1d9">HTML/CSS · OpenCV · OpenFOAM</tspan></text>
+<text x="22" y="261" xml:space="preserve" class="l" style="animation-delay:1.26s"><tspan fill="#39d353" font-weight="bold">Projetos</tspan><tspan fill="#c9d1d9">: </tspan></text>
+<text x="22" y="282" xml:space="preserve" class="l" style="animation-delay:1.38s">  <tspan fill="#58a6ff">›</tspan> <tspan fill="#c9d1d9" font-weight="bold">Aerodynamic Simulation</tspan><tspan fill="#8b949e"> — GUI que automatiza CFD de</tspan></text>
+<text x="22" y="303" xml:space="preserve" class="l" style="animation-delay:1.50s">    <tspan fill="#8b949e">perfis NACA com OpenFOAM</tspan></text>
+<text x="22" y="324" xml:space="preserve" class="l" style="animation-delay:1.62s">  <tspan fill="#58a6ff">›</tspan> <tspan fill="#c9d1d9" font-weight="bold">todo-api</tspan><tspan fill="#8b949e"> — API REST (CRUD) com FastAPI + SQLite</tspan></text>
+<text x="22" y="345" xml:space="preserve" class="l" style="animation-delay:1.74s">  <tspan fill="#58a6ff">›</tspan> <tspan fill="#c9d1d9" font-weight="bold">mottu-dashboard</tspan><tspan fill="#8b949e"> — dashboard de dados em Python</tspan></text>
+<text x="22" y="366" xml:space="preserve" class="l" style="animation-delay:1.86s">  <tspan fill="#58a6ff">›</tspan> <tspan fill="#c9d1d9" font-weight="bold">organizador-arquivos</tspan><tspan fill="#8b949e"> — organiza pastas por tipo de</tspan></text>
+<text x="22" y="387" xml:space="preserve" class="l" style="animation-delay:1.98s">    <tspan fill="#8b949e">arquivo</tspan></text>
+<text x="22" y="408" xml:space="preserve" class="l" style="animation-delay:2.10s">  <tspan fill="#58a6ff">›</tspan> <tspan fill="#c9d1d9" font-weight="bold">lista-tarefas-web</tspan><tspan fill="#8b949e"> — to-do em JS puro, salvo no</tspan></text>
+<text x="22" y="429" xml:space="preserve" class="l" style="animation-delay:2.22s">    <tspan fill="#8b949e">navegador</tspan></text>
+<text x="22" y="471" xml:space="preserve" class="l" style="animation-delay:2.34s"><tspan fill="#39d353" font-weight="bold">Perfil</tspan><tspan fill="#c9d1d9">: github.com/Thi4goVcs</tspan></text>
+<g class="l" style="animation-delay:2.46s">
+<rect x="22" y="503" width="24" height="14" rx="2" fill="#484f58"/>
+<rect x="48" y="503" width="24" height="14" rx="2" fill="#ff7b72"/>
+<rect x="74" y="503" width="24" height="14" rx="2" fill="#3fb950"/>
+<rect x="100" y="503" width="24" height="14" rx="2" fill="#d29922"/>
+<rect x="126" y="503" width="24" height="14" rx="2" fill="#58a6ff"/>
+<rect x="152" y="503" width="24" height="14" rx="2" fill="#bc8cff"/>
+<rect x="178" y="503" width="24" height="14" rx="2" fill="#39c5cf"/>
+<rect x="204" y="503" width="24" height="14" rx="2" fill="#f0f6fc"/>
+</g>
+<text x="22" y="547" class="l" style="animation-delay:2.58s"><tspan fill="#39d353">thiago@github</tspan><tspan fill="#8b949e"> ~ $ </tspan></text><rect x="162.4" y="535" width="8" height="15" fill="#c9d1d9" opacity="0"><animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.01;0.5;0.51;1" dur="1.1s" begin="2.98s" repeatCount="indefinite"/></rect>
+</g></svg>

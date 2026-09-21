@@ -1,0 +1,5 @@
+# only needed locally to regenerate the portrait / info card
+pillow
+numpy
+opencv-python-headless
+# rembg  # optional: prep_photo.py --rembg
