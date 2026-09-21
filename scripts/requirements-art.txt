@@ -2,4 +2,5 @@
 pillow
 numpy
 opencv-python-headless
-# rembg  # optional: prep_photo.py --rembg
+svgelements  # rasterizes the logos in scripts/icons
+rembg  # prep_photo.py --rembg

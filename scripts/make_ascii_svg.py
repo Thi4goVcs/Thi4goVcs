@@ -12,6 +12,8 @@ from xml.sax.saxutils import escape
 import numpy as np
 from PIL import Image
 
+from ascii_icons import icon_block
+
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "source-prepped.png"
 OUT = ROOT / "ascii-portrait.svg"
@@ -27,6 +29,17 @@ FONT = "ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"
 ROW_DELAY, ROW_DUR = 0.045, 0.22
 SCENE_LEVELS = (0.15, 0.80)  # black/white points: bright walls go blank, only real shadows print dense
 ALPHA_MIN = 100  # cutout pixels below this alpha count as background
+LABEL = "#8b949e"
+ICON_W, ICON_H = int(os.environ.get("ICON_W", 15)), int(os.environ.get("ICON_H", 9))
+# (svg in scripts/icons, side, preferred top row, fallback color, per-subpath colors, label)
+ICONS = [
+    ("python", "L", 2, "#ffd43b", ["#3776ab"] * 2 + ["#ffd43b"] * 2, "python"),
+    ("git", "R", 2, "#f05032", None, "git"),
+    ("vscode", "L", 29, "#3fa9f5", None, "vscode"),
+    ("csharp", "R", 29, "#a179dc", None, "c#"),
+    ("figma", "L", 57, "#0acf83", None, "ui/ux"),
+    ("plane", "R", 57, "#c9d1d9", None, "aviação"),
+]
 
 
 def fit(size: tuple[int, int], max_cols: int, max_rows: int) -> tuple[int, int]:
@@ -65,10 +78,56 @@ def scene_grid(img: Image.Image) -> np.ndarray:
     return ((1.0 - arr) * (len(RAMP) - 1)).round().astype(int)
 
 
+def place_icons(chars: list[list[str]], colors: list[list[str | None]], busy: np.ndarray) -> None:
+    """Stamp each icon (plus its label) onto the grid on its side, sliding down past the figure."""
+    rows, cols = busy.shape
+    for name, side, pref, color, sub_colors, label in ICONS:
+        block, block_colors = icon_block(name, ICON_W, ICON_H, RAMP, color, sub_colors)
+        col = 0 if side == "L" else cols - ICON_W
+        h = ICON_H + 2  # icon, blank row, label
+        for top in range(pref, rows - h + 1):
+            if not busy[top:top + h, col:col + ICON_W].any():
+                break
+        else:
+            raise SystemExit(f"no room for the {name} icon on side {side}")
+        for r, line in enumerate(block):
+            for c, ch in enumerate(line):
+                if ch != " ":
+                    chars[top + r][col + c], colors[top + r][col + c] = ch, block_colors[r][c]
+        lc = col + (ICON_W - len(label)) // 2
+        for c, ch in enumerate(label):
+            chars[top + h - 1][lc + c], colors[top + h - 1][lc + c] = ch, LABEL
+        busy[top:top + h, col:col + ICON_W] = True
+        print(f"  {name:7s} rows {top}-{top + h - 1}, cols {col}-{col + ICON_W - 1}")
+
+
+def styled(chars: list[str], colors: list[str | None]) -> str:
+    """Row text with a <tspan> per run of colored glyphs; uncolored glyphs inherit the figure color."""
+    out, i = [], 0
+    while i < len(chars):
+        j = i
+        while j < len(chars) and colors[j] == colors[i]:
+            j += 1
+        run = escape("".join(chars[i:j]))
+        out.append(f'<tspan fill="{colors[i]}">{run}</tspan>' if colors[i] else run)
+        i = j
+    return "".join(out)
+
+
 def main() -> None:
     img = Image.open(SRC)
-    grid = cutout_grid(img.convert("LA")) if "A" in img.getbands() else scene_grid(img)
-    lines = ["".join(RAMP[i] for i in row).rstrip() for row in grid]
+    cutout = "A" in img.getbands()
+    grid = cutout_grid(img.convert("LA")) if cutout else scene_grid(img)
+    chars = [[RAMP[i] for i in row] + [" "] * (COLS - len(row)) for row in grid]
+    colors: list[list[str | None]] = [[None] * COLS for _ in grid]
+    if cutout:
+        # Keep a 2-column / 1-row gutter around the figure free of icons.
+        busy = np.pad(grid > 0, ((0, 0), (0, COLS - grid.shape[1])))
+        busy = busy | np.roll(busy, 1, 0) | np.roll(busy, -1, 0)
+        for s in (1, 2):
+            busy = busy | np.roll(busy, s, 1) | np.roll(busy, -s, 1)
+        place_icons(chars, colors, busy)
+    lines = ["".join(row).rstrip() for row in chars]
 
     out = [
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" '
@@ -98,7 +157,7 @@ def main() -> None:
         clip = "" if STATIC else f' clip-path="url(#r{i})"'
         out.append(
             f'<text x="{PAD}" y="{y:.1f}" xml:space="preserve" textLength="{c1 * CHAR_W:.1f}" '
-            f'lengthAdjust="spacingAndGlyphs"{clip}>{escape(lines[i])}</text>'
+            f'lengthAdjust="spacingAndGlyphs"{clip}>{styled(chars[i][:c1], colors[i][:c1])}</text>'
         )
     out.append("</g>")
 
