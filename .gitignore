@@ -2,4 +2,3 @@ source-photo.*
 source-prepped.png
 __pycache__/
 .venv/
-__pycache__/
