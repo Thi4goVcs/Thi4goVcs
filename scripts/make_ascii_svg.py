@@ -31,24 +31,17 @@ SCENE_LEVELS = (0.15, 0.80)  # black/white points: bright walls go blank, only r
 ALPHA_MIN = 100  # cutout pixels below this alpha count as background
 LABEL = "#8b949e"
 ICON_W, ICON_H = int(os.environ.get("ICON_W", 15)), int(os.environ.get("ICON_H", 9))
+# Solid block letters: thin line art (_ / |) washes out at this font size.
 UI_UX = [
-    r" _   _  ___",
-    r"| | | ||_ _|",
-    r"| |_| | | |",
-    r" \___/ |___|",
-    r" _   ___  __",
-    r"| | | \ \/ /",
-    r"| |_| |>  <",
-    r" \___//_/\_\ ",
-]
-PAPER_PLANE = [
-    r"            /|",
-    r"         _/' |",
-    r"      _/'  / |",
-    r"   _/'   /   |",
-    r"_/'    /  _-'",
-    r"`-._ /  _-'",
-    r"    `/-'",
+    "@@  @@ @@@@",
+    "@@  @@  @@",
+    "@@  @@  @@",
+    "`@@@@` @@@@",
+    "",
+    "@@  @@ @@  @@",
+    "@@  @@  @@@@",
+    "@@  @@  @@@@",
+    "`@@@@` @@  @@",
 ]
 # (svg name in scripts/icons or literal ASCII art, side, preferred top row, color,
 #  per-subpath colors for an svg / per-row colors for art, label)
@@ -57,8 +50,8 @@ ICONS = [
     ("git", "R", 2, "#f05032", None, "git"),
     ("vscode", "L", 29, "#3fa9f5", None, "vscode"),
     ("csharp", "R", 29, "#a179dc", None, "c#"),
-    (UI_UX, "L", 57, "#ff7262", ["#a259ff"] * 4 + ["#ff7262"] * 4, "design"),
-    (PAPER_PLANE, "R", 57, "#79c0ff", None, "aviação"),
+    (UI_UX, "L", 57, "#ff7262", ["#b980ff"] * 5 + ["#ff7262"] * 4, "ui/ux"),
+    ("paperplane", "R", 57, "#79c0ff", None, "aviação"),
 ]
 
 
