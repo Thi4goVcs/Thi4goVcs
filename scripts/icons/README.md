@@ -1,1 +1,1 @@
-Logos: python, vscode, git, csharp, figma from [Devicon](https://github.com/devicons/devicon) (MIT); plane is `airplane-fill` from [Bootstrap Icons](https://github.com/twbs/icons) (MIT).
+Logos: python, vscode, git, csharp from [Devicon](https://github.com/devicons/devicon) (MIT). The UI/UX lettering and the paper plane are plain ASCII art in `make_ascii_svg.py`.

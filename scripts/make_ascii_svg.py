@@ -31,14 +31,34 @@ SCENE_LEVELS = (0.15, 0.80)  # black/white points: bright walls go blank, only r
 ALPHA_MIN = 100  # cutout pixels below this alpha count as background
 LABEL = "#8b949e"
 ICON_W, ICON_H = int(os.environ.get("ICON_W", 15)), int(os.environ.get("ICON_H", 9))
-# (svg in scripts/icons, side, preferred top row, fallback color, per-subpath colors, label)
+UI_UX = [
+    r" _   _  ___",
+    r"| | | ||_ _|",
+    r"| |_| | | |",
+    r" \___/ |___|",
+    r" _   ___  __",
+    r"| | | \ \/ /",
+    r"| |_| |>  <",
+    r" \___//_/\_\ ",
+]
+PAPER_PLANE = [
+    r"            /|",
+    r"         _/' |",
+    r"      _/'  / |",
+    r"   _/'   /   |",
+    r"_/'    /  _-'",
+    r"`-._ /  _-'",
+    r"    `/-'",
+]
+# (svg name in scripts/icons or literal ASCII art, side, preferred top row, color,
+#  per-subpath colors for an svg / per-row colors for art, label)
 ICONS = [
     ("python", "L", 2, "#ffd43b", ["#3776ab"] * 2 + ["#ffd43b"] * 2, "python"),
     ("git", "R", 2, "#f05032", None, "git"),
     ("vscode", "L", 29, "#3fa9f5", None, "vscode"),
     ("csharp", "R", 29, "#a179dc", None, "c#"),
-    ("figma", "L", 57, "#0acf83", None, "ui/ux"),
-    ("plane", "R", 57, "#c9d1d9", None, "aviação"),
+    (UI_UX, "L", 57, "#ff7262", ["#a259ff"] * 4 + ["#ff7262"] * 4, "design"),
+    (PAPER_PLANE, "R", 57, "#79c0ff", None, "aviação"),
 ]
 
 
@@ -81,8 +101,15 @@ def scene_grid(img: Image.Image) -> np.ndarray:
 def place_icons(chars: list[list[str]], colors: list[list[str | None]], busy: np.ndarray) -> None:
     """Stamp each icon (plus its label) onto the grid on its side, sliding down past the figure."""
     rows, cols = busy.shape
-    for name, side, pref, color, sub_colors, label in ICONS:
-        block, block_colors = icon_block(name, ICON_W, ICON_H, RAMP, color, sub_colors)
+    for source, side, pref, color, sub_colors, label in ICONS:
+        if isinstance(source, str):
+            block, block_colors = icon_block(source, ICON_W, ICON_H, RAMP, color, sub_colors)
+        else:  # literal art, centered in the icon box
+            pad_top = (ICON_H - len(source)) // 2
+            pad_left = (ICON_W - max(map(len, source))) // 2
+            block = [""] * pad_top + [" " * pad_left + line for line in source]
+            row_colors = [None] * pad_top + (sub_colors or [color] * len(source))
+            block_colors = [[row_colors[r]] * len(line) for r, line in enumerate(block)]
         col = 0 if side == "L" else cols - ICON_W
         h = ICON_H + 2  # icon, blank row, label
         for top in range(pref, rows - h + 1):
@@ -98,7 +125,7 @@ def place_icons(chars: list[list[str]], colors: list[list[str | None]], busy: np
         for c, ch in enumerate(label):
             chars[top + h - 1][lc + c], colors[top + h - 1][lc + c] = ch, LABEL
         busy[top:top + h, col:col + ICON_W] = True
-        print(f"  {name:7s} rows {top}-{top + h - 1}, cols {col}-{col + ICON_W - 1}")
+        print(f"  {label:7s} rows {top}-{top + h - 1}, cols {col}-{col + ICON_W - 1}")
 
 
 def styled(chars: list[str], colors: list[str | None]) -> str:
